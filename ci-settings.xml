@@ -1,0 +1,122 @@
+<!-- A MAVEN SETTINGS FILE TO BE USED IN CI -->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- Mirror Configuration -->
+    <mirrors>
+        <mirror>
+            <id>maven-proxy</id>
+            <name>Maven Repository Manager</name>
+            <url>${env.MAVEN_PROXY_URL}</url>
+            <mirrorOf>central</mirrorOf>
+         </mirror>
+    	<mirror>
+            <id>maven-default-http-blocker</id>
+            <mirrorOf>external:dummy:*</mirrorOf>
+            <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+            <url>http://0.0.0.0/</url>
+            <blocked>true</blocked>
+        </mirror>
+    </mirrors>
+
+    <!-- Server Configuration -->
+    <servers>
+        <!-- Server configuration for GitHub -->
+        <server>
+            <id>github</id>
+            <username>${env.GITHUBACTOR}</username>
+            <password>${env.GITHUBTOKEN}</password>
+        </server>
+        <server>
+            <id>github.pages</id>
+            <username>git</username>
+            <configuration>
+                <scmVersionType>branch</scmVersionType>
+                <scmVersion>gh-pages</scmVersion>
+            </configuration>
+        </server>
+        <server>
+            <id>dockerhub</id>
+            <username>${env.DOCKERHUB_TOKEN}</username>
+            <password>${env.DOCKERHUB_TOKEN}</password>
+        </server>
+        <server>
+            <id>ossrh</id>
+            <username>${env.MAVEN_CENTRAL_USERNAME}</username>
+            <password>${env.MAVEN_CENTRAL_TOKEN}</password>
+        </server>
+        <server>
+            <id>maven-proxy</id>
+            <username>${env.MAVEN_PROXY_USERNAME}</username>
+            <password>${env.MAVEN_PROXY_TOKEN}</password>
+        </server>
+    </servers>
+
+    <!-- Profile Configuration -->
+    <profiles>
+        <!-- Profile for Sonar -->
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <sonar.host.url>${env.SONAR_URL}</sonar.host.url>
+                <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+            </properties>
+        </profile>
+
+        <!-- Profile for GitHub -->
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/${env.GITHUBORG}/*</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+
+        <!-- Profile for Nexus Artifact repository -->
+        <profile>
+            <id>nexus</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+    </profiles>
+
+    <!-- Active Profiles -->
+    <activeProfiles>
+        <!-- The 'nexus' profile is always active -->
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+
+</settings>
