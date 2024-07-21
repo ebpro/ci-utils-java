@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <!-- Mirror Configuration -->
-    <mirrors>
+    <!--mirrors>
         <mirror>
             <id>maven-proxy</id>
             <name>Maven Repository Manager</name>
@@ -18,7 +18,7 @@
             <url>http://0.0.0.0/</url>
             <blocked>true</blocked>
         </mirror>
-    </mirrors>
+    </mirrors-->
 
     <!-- Server Configuration -->
     <servers>
