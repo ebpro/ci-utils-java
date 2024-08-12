@@ -29,7 +29,7 @@
             <password>${env.GITHUBTOKEN}</password>
         </server>
         <server>
-            <id>github.pages</id>
+            <id>githubpages</id>
             <username>git</username>
             <configuration>
                 <scmVersionType>branch</scmVersionType>
