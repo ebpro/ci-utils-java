@@ -57,6 +57,46 @@
             </properties>
         </profile>
 
+        <!-- Profile for GitHub -->
+        <profile>
+            <id>github</id>
+            <repositories>
+            <repository>
+                    <id>central</id>
+                    <url>https://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/${env.GITHUBORG}/*</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+            </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>https://central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
     </profiles>
 
     <!-- Active Profiles -->
