@@ -3,16 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-    <!-- Mirror Configuration -->
-    <mirrors>
-        <mirror>
-            <id>maven-proxy</id>
-            <name>Maven Repository Manager</name>
-            <url>${env.MAVEN_PROXY_URL}</url>
-            <mirrorOf>central</mirrorOf>
-         </mirror>
-    </mirrors>
-
     <!-- Server Configuration -->
     <servers>
         <!-- Server configuration for GitHub -->
@@ -38,11 +28,6 @@
             <id>ossrh</id>
             <username>${env.MAVEN_CENTRAL_USERNAME}</username>
             <password>${env.MAVEN_CENTRAL_TOKEN}</password>
-        </server>
-        <server>
-            <id>maven-proxy</id>
-            <username>${env.MAVEN_PROXY_USERNAME}</username>
-            <password>${env.MAVEN_PROXY_TOKEN}</password>
         </server>
     </servers>
 
