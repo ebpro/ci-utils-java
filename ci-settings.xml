@@ -43,7 +43,7 @@
         </profile>
 
         <!-- Profile for GitHub -->
-        <!--profile>
+        <profile>
             <id>github</id>
             <repositories>
             <repository>
@@ -80,12 +80,13 @@
                     </snapshots>
                 </pluginRepository>
             </pluginRepositories>
-        </profile-->
+        </profile>
 
     </profiles>
 
     <!-- Active Profiles -->
     <activeProfiles>
+        <activeProfile>github</activeProfile>
     </activeProfiles>
 
 </settings>
