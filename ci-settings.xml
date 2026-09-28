@@ -70,7 +70,8 @@
             </pluginRepositories>
         </profile>
 
-        <!-- Profile for Nexus proxy/cache: activates only when MAVEN_PROXY_URL is set -->
+        <!-- Profile for Nexus proxy/cache: activates only when MAVEN_PROXY_URL is set.
+             Uses <mirror> to intercept all 'central' requests and route through Nexus. -->
         <profile>
             <id>nexus-proxy</id>
             <activation>
@@ -78,30 +79,13 @@
                     <name>env.MAVEN_PROXY_URL</name>
                 </property>
             </activation>
-            <repositories>
-                <repository>
-                    <id>central</id>
+            <mirrors>
+                <mirror>
+                    <id>nexus-proxy</id>
+                    <mirrorOf>central</mirrorOf>
                     <url>${env.MAVEN_PROXY_URL}/content/repositories/central</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>central</id>
-                    <url>${env.MAVEN_PROXY_URL}/content/repositories/central</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
+                </mirror>
+            </mirrors>
         </profile>
 
     </profiles>
