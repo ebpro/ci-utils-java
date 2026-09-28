@@ -29,6 +29,11 @@
             <username>${env.MAVEN_CENTRAL_USERNAME}</username>
             <password>${env.MAVEN_CENTRAL_TOKEN}</password>
         </server>
+        <server>
+            <id>nexus-proxy</id>
+            <username>${env.NEXUS_USERNAME}</username>
+            <password>${env.NEXUS_PASSWORD}</password>
+        </server>
     </servers>
 
     <!-- Profile Configuration -->
@@ -58,6 +63,40 @@
                 <pluginRepository>
                     <id>github</id>
                     <url>https://maven.pkg.github.com/${env.GITHUBORG}/*</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+
+        <!-- Profile for Nexus proxy/cache: activates only when MAVEN_PROXY_URL is set -->
+        <profile>
+            <id>nexus-proxy</id>
+            <activation>
+                <property>
+                    <name>env.MAVEN_PROXY_URL</name>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>${env.MAVEN_PROXY_URL}/content/repositories/central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>${env.MAVEN_PROXY_URL}/content/repositories/central</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
