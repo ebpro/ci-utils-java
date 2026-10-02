@@ -10,7 +10,7 @@
         <mirror>
             <id>nexus-proxy</id>
             <url>${env.MAVEN_PROXY_URL}</url>
-            <mirrorOf>*</mirrorOf>
+            <mirrorOf>central</mirrorOf>
         </mirror>
     </mirrors>
 
