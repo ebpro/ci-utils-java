@@ -3,6 +3,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
+    <!-- Top-level mirrors: Maven only supports <mirrors> as a direct child of <settings>.
+         Nesting <mirrors> inside a <profile> is silently ignored, so the proxy was never active.
+         This mirror (id "nexus-proxy") authenticates using the "nexus-proxy" server below. -->
+    <mirrors>
+        <mirror>
+            <id>nexus-proxy</id>
+            <url>${env.MAVEN_PROXY_URL}</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+
     <!-- Server Configuration -->
     <servers>
         <!-- Server configuration for GitHub -->
@@ -69,25 +80,6 @@
                 </pluginRepository>
             </pluginRepositories>
         </profile>
-
-        <!-- Profile for Nexus proxy/cache: activates only when MAVEN_PROXY_URL is set.
-             Uses <mirror> to intercept all 'central' requests and route through Nexus. -->
-        <profile>
-            <id>nexus-proxy</id>
-            <activation>
-                <property>
-                    <name>env.MAVEN_PROXY_URL</name>
-                </property>
-            </activation>
-            <mirrors>
-                <mirror>
-                    <id>nexus-proxy</id>
-                    <mirrorOf>central</mirrorOf>
-                    <url>${env.MAVEN_PROXY_URL}/content/repositories/central</url>
-                </mirror>
-            </mirrors>
-        </profile>
-
     </profiles>
 
     <!-- Active Profiles -->
