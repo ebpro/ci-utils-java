@@ -14,6 +14,17 @@
         </mirror>
     </mirrors>
 
+    <!-- Plugin Groups: enables prefix-based plugin resolution (e.g., "cyclonedx:makeBom").
+         Without this, Maven only checks org.apache.maven.plugins and org.codehaus.mojo,
+         and Nexus proxy 500-errors on plugin-group maven-metadata.xml for other groups. -->
+    <pluginGroups>
+        <pluginGroup>org.apache.maven.plugins</pluginGroup>
+        <pluginGroup>org.codehaus.mojo</pluginGroup>
+        <pluginGroup>org.apache.archetype</pluginGroup>
+        <pluginGroup>org.cyclonedx</pluginGroup>
+        <pluginGroup>org.graalvm.buildtools</pluginGroup>
+    </pluginGroups>
+
     <!-- Server Configuration -->
     <servers>
         <!-- Server configuration for GitHub -->
